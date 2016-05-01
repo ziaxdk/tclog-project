@@ -1,0 +1,60 @@
+Timestamp: 10-08-2015 17:00:24
+Message: Validation - parameters for ProductQuery - CartID: 67402b33-493f-e511-8a70-00155d6123c5 | Departure: PMI | Arrival: HAM | Time: 08/16/2015 06:05:00 | FligtOperator: 00000000-0000-0000-0000-000000000004 | ProductId: 6807 | Currency: EUR
+Category: Information
+Machine: DK-AP-CPHBTC5
+App Domain: Shoppingcart.ServiceHost.exe
+ProcessId: 35688
+Process Name: C:\Program Files\Thomas Cook Airlines\ShoppingcartService\Shoppingcart.ServiceHost.exe
+Thread Name: 
+Win32 ThreadId: 33236
+Extended Properties: typeNamespace - Shoppingcart.Logic.ShoppingcartLogic
+typeName - CartValidation
+typeMemberName - GetProductQuery
+threadPrincipal - 
+processUser - DK\svcShoppingcartProd
+
+Timestamp: 10-08-2015 17:00:24
+Message: Validation - parameters for ProductQuery - CartID: 67402b33-493f-e511-8a70-00155d6123c5 | Departure: PMI | Arrival: HAM | Time: 08/16/2015 06:05:00 | FligtOperator: 00000000-0000-0000-0000-000000000004 | ProductId: 4705 | Currency: EUR
+Category: Information
+Machine: DK-AP-CPHBTC5
+App Domain: Shoppingcart.ServiceHost.exe
+ProcessId: 35688
+Process Name: C:\Program Files\Thomas Cook Airlines\ShoppingcartService\Shoppingcart.ServiceHost.exe
+Thread Name: 
+Win32 ThreadId: 33236
+Extended Properties: typeNamespace - Shoppingcart.Logic.ShoppingcartLogic
+typeName - CartValidation
+typeMemberName - GetProductQuery
+threadPrincipal - 
+processUser - DK\svcShoppingcartProd
+
+Timestamp: 10-08-2015 17:00:24
+Message: Validation - parameters for ProductQuery - CartID: 67402b33-493f-e511-8a70-00155d6123c5 | Departure: PMI | Arrival: HAM | Time: 08/16/2015 06:05:00 | FligtOperator: 00000000-0000-0000-0000-000000000004 | ProductId: 4899 | Currency: EUR
+Category: Information
+Machine: DK-AP-CPHBTC5
+App Domain: Shoppingcart.ServiceHost.exe
+ProcessId: 35688
+Process Name: C:\Program Files\Thomas Cook Airlines\ShoppingcartService\Shoppingcart.ServiceHost.exe
+Thread Name: 
+Win32 ThreadId: 33236
+Extended Properties: typeNamespace - Shoppingcart.Logic.ShoppingcartLogic
+typeName - CartValidation
+typeMemberName - GetProductQuery
+threadPrincipal - 
+processUser - DK\svcShoppingcartProd
+
+Timestamp: 10-08-2015 17:00:24
+Message: Skipping cart because it's Condor and PaymentType is none 67402b33-493f-e511-8a70-00155d6123c5
+Category: Information
+Machine: DK-AP-CPHBTC5
+App Domain: Shoppingcart.ServiceHost.exe
+ProcessId: 35688
+Process Name: C:\Program Files\Thomas Cook Airlines\ShoppingcartService\Shoppingcart.ServiceHost.exe
+Thread Name: 
+Win32 ThreadId: 33236
+Extended Properties: typeNamespace - Shoppingcart.Logic.ShoppingcartLogic
+typeName - CartValidation
+typeMemberName - ValidateCart
+threadPrincipal - 
+processUser - DK\svcShoppingcartProd
+
