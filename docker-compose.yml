@@ -1,0 +1,27 @@
+es:
+  image: elasticsearch
+  ports:
+    - "9200:9200"
+
+ki:
+  image: kibana
+  ports:
+    - "5601:5601"
+  links:
+    - "es:elasticsearch"
+
+fd:
+  image: ziaxdk/tclogfluentd
+  ports:
+    - "8888:8888"
+  links:
+    - es
+
+parser:
+  image: ziaxdk/tclog-parse
+  links:
+    - "fd:fd"
+#  entrypoint: ./wait-for-it.sh es:9200
+  volumes:
+    # - "d:\Ziax\Desktop\docker\parse\files:/usr/src/logs"
+    - "/d/docker/parse/files/:/usr/src/logs:ro"
