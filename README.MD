@@ -32,3 +32,16 @@ $ sudo mount -t vboxsf d/Desktop /d
 ```
 $ docker run -it --rm --link es:elasticsearch --name kibana -p 5601:5601 kibana
 ```
+
+Or simple
+
+
+```
+docker run -d -p 9200:9200 --name es elasticsearch
+docker run -d --link es:elasticsearch --name kibana -p 5601:5601 kibana
+docker run -d -p 8888:8888 --name fd --link es:es ziaxdk/tclogfluentd
+sudo mkdir /d
+sudo mount -t vboxsf d/Desktop /d
+docker run -it --rm --name parser -v /d/docker/parse/files/:/usr/src/logs --link fd:fd ziaxdk/tclog-parse
+docker rm -f $(docker ps -a -q) # remove all
+```
