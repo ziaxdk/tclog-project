@@ -14,6 +14,7 @@ fd:
   image: ziaxdk/tclogfluentd
   ports:
     - "8888:8888"
+    - "24224:24224"
   links:
     - es
 
@@ -25,3 +26,4 @@ parser:
   volumes:
     # - "d:\Ziax\Desktop\docker\parse\files:/usr/src/logs"
     - "/d/docker/parse/files/:/usr/src/logs:ro"
+    # - "/c/Users/keo/Desktop/tclog-project/parse/files/:/usr/src/logs:ro"
