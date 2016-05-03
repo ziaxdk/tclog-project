@@ -1,18 +1,25 @@
-// const path = './files';
 const fs = require('fs');
 const path = require('path');
 const inspect = require('util').inspect;
 const async = require('async');
 const eventstream = require('event-stream');
 const log = require('bunyan').createLogger({ name: "docker-tc-log" });
-const request = require('request');
+const logger = require('fluent-logger');
+// The 2nd argument can be omitted. Here is a defualt value for options.
 
 
-// var importPath = process.env.DOCKLOG_PATH || './files';
-var importPath = '/usr/src/logs';
+var buffer = [];
+var counter = 0;
+var messageCounter = 1;
 
+var importPath = process.env.FD_FILES_PATH || '/usr/src/logs';
+log.info('Using log path to read from: %s', importPath);
+
+
+configureOutput();
 async.series([ processFiles ], function() {
   log.info('Done. Inserted %s entries', counter);
+  logger.end();
 });
 
 
@@ -24,16 +31,16 @@ function processFiles(cb) {
 }
 
 function processFile(file, cb) {
-  log.info('Processing \'%s\'', path.join(importPath, file));
+  log.info('Processing \'%s\'', file);
+  messageCounter = 1;
 
   fs.createReadStream(path.join(importPath, file))
     .pipe(eventstream.split())
     .pipe(eventstream.map(map))
-    .pipe(eventstream.map(post))
-
-   // .pipe(eventstream.map(function(data, _cb) { console.log(data);  _cb(null, inspect(JSON.parse(data))); }))
-   .pipe(eventstream.map((data, _cb) => { _cb(null, inspect(JSON.stringify(data))) }))
-   // .pipe(process.stdout);
+    .on('end', () => {
+      cb();
+    })
+    .pipe(eventstream.map(fluentLogger))
 }
 
 var labels = [ { 'Timestamp': lineParseFn },
@@ -52,14 +59,39 @@ var labels = [ { 'Timestamp': lineParseFn },
                { 'processUser': lineParseFn }
               ];
 
-var buffer = [];
-var counter = 0;
+// function post(data, _cb) {
+//   request.post({ url:'http://192.168.99.100:8888/docker.log', form: { json: JSON.stringify(data) } }, (err, httpResponse, body) => {
+//     log.info('Uploaded object %s', messageCounter++);
+//     if (err) throw err;
+//     _cb(null, data);
+//   });
 
-function post(data, _cb) {
-  request.post({ url:'http://fd:8888/docker.log', form: {json: JSON.stringify(data)} }, (err, httpResponse, body) => {
-    if (err) throw err;
-    _cb(null, data);
-  })
+// }
+// function postRaw(data, _cb) {
+//   console.log(msgpack.encode(data).toString('hex'));
+//   _cb(null, data);
+//   // request.post({ url:'http://fd:24224/docker.log', form: {json: JSON.stringify(data)} }, (err, httpResponse, body) => {
+//   //   if (err) throw err;
+//   //   _cb(null, data);
+//   // });
+// }
+
+function configureOutput() {
+  var uri = process.env.FD_PATH || 'fd';
+  logger.configure('docker', {
+     host: uri,
+     port: 24224,
+     timeout: 3.0,
+     reconnectInterval: 600000 // 10 minutes
+  });
+  log.info('Using output uri to fluentd: %s', uri);
+}
+
+function fluentLogger(data, _cb) {
+  logger.emit('log', data);
+  if (messageCounter++ % 100 === 0) {
+    log.info('Emitting data: %s', messageCounter);
+  }
 }
 
 function map(data, cb) {

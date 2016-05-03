@@ -1,7 +1,6 @@
 from alpine
 
-RUN apk --update add build-base ca-certificates ruby-dev \
-     && rm -rf /var/cache/apk/*
+RUN apk --update add build-base ca-certificates ruby ruby-irb ruby-dev && rm -rf /var/cache/apk/*
 
 RUN echo 'gem: --no-document' >> /etc/gemrc
 RUN gem install fluentd
