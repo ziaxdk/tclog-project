@@ -58,3 +58,25 @@ typeMemberName - ValidateCart
 threadPrincipal - 
 processUser - DK\svcShoppingcartProd
 
+Timestamp: 01-05-2016 10:53:32
+Message: Cannot add a line when cart is archived
+Category: Error
+Machine: DK-AP-CPHBTC5
+App Domain: Shoppingcart.ServiceHost.exe
+ProcessId: 17744
+Process Name: C:\Program Files\Thomas Cook Airlines\ShoppingcartService\Shoppingcart.ServiceHost.exe
+Thread Name: Rebus 1 worker 1
+Win32 ThreadId: 9068
+Extended Properties: exception - System.InvalidOperationException: Cannot add a line when cart is archived
+   at Shoppingcart.Logic.ShoppingcartLogic.State.ArchivedCartState.AddLine(ShoppingcartLine line, ICollection`1 lines)
+   at Shoppingcart.Logic.ShoppingcartLogic.BaseShoppingcart.AddLine(ShoppingcartLine line)
+   at Shoppingcart.Logic.ShoppingcartLogic.ShoppingcartFlightOperatorTcas.ReceivePaymentAuthorization(Decimal amount, String transactionId, String comment, DibsPrepaymentStatus status)
+   at Shoppingcart.Logic.ShoppingcartLogic.BaseShoppingcart.ReceivePaymentAuthorization(Decimal amount, String transactionId, String comment, DibsPrepaymentStatus status)
+   at Shoppingcart.Logic.RebusEventHandlers.Payment.AuthorizationCompletedEventHandler.Handle(AuthorizationCompleted message)
+correlationId - 5edadd15-b4ef-40ed-a67e-59d65d53e09a
+typeNamespace - Shoppingcart.Logic.RebusEventHandlers.Payment
+typeName - AuthorizationCompletedEventHandler
+typeMemberName - Handle
+threadPrincipal - 
+processUser - DK\svcShoppingcartProd
+
